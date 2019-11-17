@@ -586,8 +586,11 @@ cdef bytes unconvert_uuid(object value):
 cdef bytes unconvert_decimal(object value):
     return f'{value}'.encode('latin-1')
 
+cdef bytes unconvert_bytes(object value):
+    return b"'" + value + b"'"
 
 cdef dict PY_TYPES_MAPPING = {
+    bytes: unconvert_bytes,
     int: unconvert_int,
     float: unconvert_float,
     str: unconvert_str,
