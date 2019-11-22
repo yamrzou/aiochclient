@@ -587,7 +587,7 @@ cdef bytes unconvert_decimal(object value):
     return f'{value}'.encode('latin-1')
 
 cdef bytes unconvert_bytes(object value):
-    return b"'" + value + b"'"
+    return b"'" + value.replace(b"\\", b"\\\\").replace(b"'", b"\\'") + b"'"
 
 cdef dict PY_TYPES_MAPPING = {
     bytes: unconvert_bytes,
